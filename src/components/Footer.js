@@ -2,7 +2,6 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
 function Copyright() {
@@ -17,14 +16,12 @@ function Copyright() {
   );
 }
 
-function Footer(props) {
-  const { description, title } = props;
-
+const Footer = function () {
   return (
     <Box component="footer" sx={{ bgcolor: 'background.paper', py: 6 }}>
       <Container maxWidth="lg">
         <Typography variant="h6" align="center" gutterBottom>
-          {title}
+          SD Photographers
         </Typography>
         <Typography
           variant="subtitle1"
@@ -32,17 +29,16 @@ function Footer(props) {
           color="text.secondary"
           component="p"
         >
-          {description}
+          SD Photographers is the first online platform 
+          for photographers in Bangladesh. The professional 
+          photographer's directory comes to you where you can 
+          find professional photographers in quick, convenient,
+          & efficient manner.
         </Typography>
         <Copyright />
       </Container>
     </Box>
   );
-}
-
-Footer.propTypes = {
-  description: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
 };
 
 export default Footer;
