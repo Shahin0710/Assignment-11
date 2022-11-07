@@ -5,14 +5,14 @@ import Link from '@mui/material/Link';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
+import TopBanner from './TopBanner';
 
 const sections = [
-  { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
-  { title: 'Science', url: '#' },
-  { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
-  { title: 'Travel', url: '#' },
+  { title: 'Home', url: '/' },
+  { title: 'Service', url: '/service' },
+  { title: 'Review', url: '/review' },
+  { title: 'Blog', url: '/blog' },
+  { title: 'Contact', url: '/contact' },
 ];
 
 const Header = function () {
@@ -28,7 +28,7 @@ const Header = function () {
           noWrap
           sx={{ flex: 1 }}
         >
-          title
+          SD Photographers
         </Typography>
         <IconButton>
           <SearchIcon />
@@ -55,6 +55,7 @@ const Header = function () {
           </Link>
         ))}
       </Toolbar>
+      <TopBanner />
     </React.Fragment>
   );
 };

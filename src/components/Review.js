@@ -2,14 +2,14 @@ import { Typography } from '@mui/material';
 import React from 'react';
 import ComponentsLayout from './ComponentsLayout';
 
-const Home = function () {
+const Review = function () {
     return (
         <ComponentsLayout>
-            <Typography variant="h1" color="error" align="center">
-                Home
+            <Typography variant="h1" color="error" align="center" gutterBottom>
+                Review
             </Typography>
         </ComponentsLayout>
     );
 };
 
-export default Home;
+export default Review;
