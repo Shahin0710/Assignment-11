@@ -1,16 +1,15 @@
-import AcUnitIcon from '@mui/icons-material/AcUnit';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import { Route, Routes } from 'react-router-dom';
+import Home from './components/Home';
+import PageNotFound from './components/PageNotFound';
 
 function App() {
   return (
-    <div>
-      <h1>Hello World...</h1>
-      <Stack spacing={2} direction="row">
-        <Button variant="outlined">Outlined</Button>
-        <AcUnitIcon />
-      </Stack>
-    </div>
+      <div>
+        <Routes>
+          <Route path="/" element={<Home />} /> 
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </div>
   );
 }
 
