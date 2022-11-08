@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
+import { AuthContext } from '../contexts/UserContext';
 import TopBanner from './TopBanner';
 
 const sections = [
@@ -31,9 +32,18 @@ const sections = [
   });
 
 const Header = function () {
+  const {user, logOut} = React.useContext(AuthContext);
+
   const { classes } = useStyles();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const handleSignOut = () => {
+    logOut()
+        .then(() => { })
+        .catch(error => console.error(error));
+        navigate('/login');
+  }
 
   return (
     <React.Fragment>
@@ -52,12 +62,20 @@ const Header = function () {
         <IconButton>
           <SearchIcon />
         </IconButton>
-        <Button variant="outlined" size="small" onClick={() => navigate('/signup')}>
-          Sign up
-        </Button>
-        <Button variant="outlined" size="small" color='secondary' sx={{ ml: 1.5 }} onClick={() => navigate('/login')}>
-          Sign in
-        </Button>
+          {user?.email ? 
+              <Button variant="outlined" size="small" color='error' onClick={handleSignOut}>
+                Log out
+              </Button>
+              :
+            <>
+              <Button variant="outlined" size="small" onClick={() => navigate('/signup')}>
+                Sign up
+              </Button>
+              <Button variant="outlined" size="small" color='secondary' sx={{ ml: 1.5 }} onClick={() => navigate('/login')}>
+                Sign in
+              </Button>
+            </>
+          }
       </Toolbar>
       <Toolbar
         component="nav"

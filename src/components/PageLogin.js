@@ -11,8 +11,10 @@ import Paper from '@mui/material/Paper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 import { AuthContext } from '../contexts/UserContext';
 import ComponentsLayout from './ComponentsLayout';
 
@@ -23,20 +25,38 @@ const PageLogin = () => {
     const navigate = useNavigate()
 
     const location = useLocation();
-
     const from = location.state?.from?.pathname || '/';
 
-    const handleSubmit = event => {
-        event.preventDefault();
-        
-        const form = event.target;
-        const email = form.email.value;
-        const password = form.password.value;
+    const initialValues = {
+        email: '',
+        password: '',
+    };
+
+    const validationSchema = Yup.object().shape({
+        email: Yup.string().email('Enter valid email').required('Email is required'),
+        password: Yup.string()
+            .min(6, 'Minimum characters should be 6')
+            .max(10, 'Maximum characters should be 10')
+            .required('Password is required'),
+        // re_password: Yup.string()
+        //     .oneOf([Yup.ref('password')], 'Password does not matches')
+        //     .required('Re_type password is required'),
+    });
+
+    const onSubmit = (values, props) => {
+        const formReset = () => {
+            props.resetForm();
+        };
+
+        const email = values.email;
+        const password = values.password;
+
         signIn(email, password)
             .then(result => {
-                const user = result.user;
-                console.log(user);
-                form.reset();
+                // const user = result.user;
+                // console.log(user);
+                // form.reset();
+                formReset();
                 navigate(from, {replace: true});
             })
             .catch(error => {
@@ -80,52 +100,55 @@ const PageLogin = () => {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="/login" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="/signup" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} sx={{ mt: 1 }}>
+              {(formik) => (
+                <Form noValidate>
+                  <Field
+                    sx={{ mb: 5 }}
+                    as={TextField}
+                    name="email"
+                    label="Email Address"
+                    fullWidth
+                    required
+                    error={formik.errors.email && formik.touched.email}
+                    helperText={<ErrorMessage name="email" />}
+                  />
+                  <Field
+                    as={TextField}
+                    name="password"
+                    label="Enter Password"
+                    fullWidth
+                    required
+                    error={formik.errors.password && formik.touched.password}
+                    helperText={<ErrorMessage name="password" />}
+                  />
+                  <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Sign In
+                  </Button>
+                  <Grid container>
+                    <Grid item xs>
+                      <Link href="/login" variant="body2">
+                        Forgot password?
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Link href="/signup" variant="body2">
+                        {"Don't have an account? Sign Up"}
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </Form>
+                )}
+            </Formik>
           </Box>
         </Grid>
       </Grid>

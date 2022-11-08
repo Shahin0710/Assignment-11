@@ -1,6 +1,7 @@
 import { Backdrop, CircularProgress } from '@mui/material';
 import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import ComponentsLayout from '../components/ComponentsLayout';
 import { AuthContext } from '../contexts/UserContext';
 
 const ProtectedRoute = ({children}) => {
@@ -8,11 +9,11 @@ const ProtectedRoute = ({children}) => {
     const location = useLocation();
 
     if(loading) {
-        return <div>
+        return <ComponentsLayout>
                 <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={true}>
                     <CircularProgress color="inherit" />
                 </Backdrop>
-        </div>
+        </ComponentsLayout>
     }
 
     if (user && user.uid){
