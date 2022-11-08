@@ -8,6 +8,7 @@ import PageNotFound from './components/PageNotFound';
 import PageSignup from './components/PageSignup';
 import Review from './components/Review';
 import Service from './components/Service';
+import SingleService from './components/SingleService';
 import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/blog" element={<Blog />} /> 
           <Route path="/contact" element={<Contact />} />
           <Route path="/all_service" element={<AllService />} />
+          <Route path="/single_service/:id" element={<SingleService />} />
           {/* ProtectedRoute */}
               <Route path="/review" element={<ProtectedRoute><Review /></ProtectedRoute>} /> 
           {/* ProtectedRoute */} 
