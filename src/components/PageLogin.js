@@ -8,6 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
+import Snackbar from '@mui/material/Snackbar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -16,6 +17,7 @@ import * as React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { AuthContext } from '../contexts/UserContext';
+import AlertMessage from './AlertMessage';
 import ComponentsLayout from './ComponentsLayout';
 
 const theme = createTheme();
@@ -23,6 +25,16 @@ const theme = createTheme();
 const PageLogin = () => {
     const { signIn } = React.useContext(AuthContext);
     const navigate = useNavigate()
+
+    const [massage, setMassage] = React.useState('');
+    const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setSnackbarOpen(false);
+    };
 
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -38,9 +50,6 @@ const PageLogin = () => {
             .min(6, 'Minimum characters should be 6')
             .max(10, 'Maximum characters should be 10')
             .required('Password is required'),
-        // re_password: Yup.string()
-        //     .oneOf([Yup.ref('password')], 'Password does not matches')
-        //     .required('Re_type password is required'),
     });
 
     const onSubmit = (values, props) => {
@@ -53,14 +62,12 @@ const PageLogin = () => {
 
         signIn(email, password)
             .then(result => {
-                // const user = result.user;
-                // console.log(user);
-                // form.reset();
                 formReset();
                 navigate(from, {replace: true});
             })
             .catch(error => {
-                console.error(error)
+                setMassage(error.message);
+                setSnackbarOpen(true);
             })
     }
 
@@ -68,7 +75,7 @@ const PageLogin = () => {
     <ComponentsLayout>
     <Box sx={{ my: 5 }}>
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
           item
@@ -154,6 +161,13 @@ const PageLogin = () => {
       </Grid>
     </ThemeProvider>
     </Box>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={massage}
+        action={<AlertMessage handleClose={handleClose} />}
+      />
     </ComponentsLayout>
   )
 }
