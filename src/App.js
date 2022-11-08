@@ -7,6 +7,7 @@ import PageNotFound from './components/PageNotFound';
 import PageSignup from './components/PageSignup';
 import Review from './components/Review';
 import Service from './components/Service';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
   return (
@@ -16,9 +17,11 @@ function App() {
           <Route path="/login" element={<PageLogin />} /> 
           <Route path="/signup" element={<PageSignup />} /> 
           <Route path="/service" element={<Service />} /> 
-          <Route path="/review" element={<Review />} /> 
           <Route path="/blog" element={<Blog />} /> 
-          <Route path="/contact" element={<Contact />} /> 
+          <Route path="/contact" element={<Contact />} />
+          {/* ProtectedRoute */}
+              <Route path="/review" element={<ProtectedRoute><Review /></ProtectedRoute>} /> 
+          {/* ProtectedRoute */} 
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>

@@ -6,12 +6,13 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 
 const post = {
-  title: 'Title of a longer featured blog post',
+  title: 'BEST PHOTOGRAPHERS',
   description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: 'https://source.unsplash.com/random',
-  imageText: 'main image description',
-  linkText: 'Continue reading…',
+    " HIRE A PHOTOGRAPHER / CINEMATOGRAPHER. For Any Event, Anywhere in Bangladesh ",
+    // image: 'https://source.unsplash.com/random',
+  image: 'https://cdn.pixabay.com/photo/2013/11/28/10/02/camera-219958_960_720.jpg',
+  imageText: 'main image',
+  linkText: 'Contact with us',
 };
 
 const TopBanner = function () {
@@ -55,7 +56,7 @@ const TopBanner = function () {
             <Typography variant="h5" color="inherit" paragraph>
               {post.description}
             </Typography>
-            <Link variant="subtitle1" href="#">
+            <Link variant="subtitle1" href="/contact">
               {post.linkText}
             </Link>
           </Box>

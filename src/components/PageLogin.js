@@ -12,19 +12,37 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/UserContext';
 import ComponentsLayout from './ComponentsLayout';
 
 const theme = createTheme();
 
 const PageLogin = () => {
-    const handleSubmit = (event) => {
+    const { signIn } = React.useContext(AuthContext);
+    const navigate = useNavigate()
+
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
+
+    const handleSubmit = event => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-        email: data.get('email'),
-        password: data.get('password'),
-        });
-    };
+        
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                navigate(from, {replace: true});
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
 
   return (
     <ComponentsLayout>
@@ -38,7 +56,7 @@ const PageLogin = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://cdn.pixabay.com/photo/2014/02/02/17/40/photographs-256888_960_720.jpg)',
+            backgroundImage: 'url(https://cdn.pixabay.com/photo/2017/12/28/22/03/lens-3046269_960_720.jpg)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -62,7 +80,7 @@ const PageLogin = () => {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -97,12 +115,12 @@ const PageLogin = () => {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="/login" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
