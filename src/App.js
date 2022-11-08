@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import AllService from './components/AllService';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Home from './components/Home';
@@ -19,6 +20,7 @@ function App() {
           <Route path="/service" element={<Service />} /> 
           <Route path="/blog" element={<Blog />} /> 
           <Route path="/contact" element={<Contact />} />
+          <Route path="/all_service" element={<AllService />} />
           {/* ProtectedRoute */}
               <Route path="/review" element={<ProtectedRoute><Review /></ProtectedRoute>} /> 
           {/* ProtectedRoute */} 
