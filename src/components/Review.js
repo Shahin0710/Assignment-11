@@ -76,50 +76,65 @@ const Review = function () {
 
     return (
         <ComponentsLayout>
-          <Box sx={{ my: 5 }}>
-            <Grid container spacing={4}>
-                {commentData?.filter((option) => option?.userEmail === user?.email).map((item) => (
-                  <Grid item xs={12} md={6} key={item?._id}>
-                      <Card sx={{ maxWidth: "full", mb: 2.5 }}>
-                        <CardHeader
-                          avatar={
-                            <Avatar alt="P" src={item?.userImg} />
-                          }
-                          title={item?.userName}
-                        />
-                        <CardContent>
-                          <Typography variant="body3" color="text.secondary">
-                            {item?.text}
-                          </Typography>
-                        </CardContent>
-                        <CardActions sx={{ my: 2.5 }}>
-                          <Stack direction="row" spacing={2}>
-                            <Button onClick={() => handleSingleView(item?._id)} variant="outlined" size="small" color="secondary" endIcon={<SendIcon />}>
-                                View
-                            </Button>
-                            <Button onClick={() => handleSingleEdit(item?._id)} variant="outlined" size="small" color="success" endIcon={<SendIcon />}>
-                                Edit
-                            </Button>
-                            <Button onClick={() => handleDelete(item?._id)} variant="outlined" size="small" color="error" startIcon={<DeleteIcon />}>
-                                Delete
-                            </Button>
-                          </Stack>
-                        </CardActions>
-                      </Card>
-                  </Grid>
-                ))}
-            </Grid>
+          <Box>
+          {commentData?.filter((option) => option?.userEmail === user?.email).length === 0 ? (
+                <Box sx={{ my: 15 }}>
+                <Typography variant="h5" color="error" align="center" gutterBottom>
+                    There is No Data !
+                </Typography>
+                <Typography variant="h5" align="center" gutterBottom>
+                    You are still now did not create any commend
+                </Typography>
+                </Box>
+          ) : (
+              <Box>
+                <Box sx={{ my: 5 }}>
+                    <Grid container spacing={4}>
+                        {commentData?.filter((option) => option?.userEmail === user?.email).map((item) => (
+                          <Grid item xs={12} md={6} key={item?._id}>
+                              <Card sx={{ maxWidth: "full", mb: 2.5 }}>
+                                <CardHeader
+                                  avatar={
+                                    <Avatar alt="P" src={item?.userImg} />
+                                  }
+                                  title={item?.userName}
+                                />
+                                <CardContent>
+                                  <Typography variant="body3" color="text.secondary">
+                                    {item?.text}
+                                  </Typography>
+                                </CardContent>
+                                <CardActions sx={{ my: 2.5 }}>
+                                  <Stack direction="row" spacing={2}>
+                                    <Button onClick={() => handleSingleView(item?._id)} variant="outlined" size="small" color="secondary" endIcon={<SendIcon />}>
+                                        View
+                                    </Button>
+                                    <Button onClick={() => handleSingleEdit(item?._id)} variant="outlined" size="small" color="success" endIcon={<SendIcon />}>
+                                        Edit
+                                    </Button>
+                                    <Button onClick={() => handleDelete(item?._id)} variant="outlined" size="small" color="error" startIcon={<DeleteIcon />}>
+                                        Delete
+                                    </Button>
+                                  </Stack>
+                                </CardActions>
+                              </Card>
+                          </Grid>
+                        ))}
+                    </Grid>
+                  </Box>
+                  {/* DELETE DIALOG BOX OPEN */}
+                <DeleteDialogBoxOpen deleteOpenBox={deleteOpenBox} handleDeleteNo={handleDeleteNo} handleDeleteYes={handleDeleteYes} />
+                  {/* DELETE SUCCESS MASSAGE */}
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={6000}
+                    onClose={handleClose}
+                    message={massage}
+                    action={<AlertMessage handleClose={handleClose} />}
+                /> 
+              </Box>
+          )}
           </Box>
-          {/* DELETE DIALOG BOX OPEN */}
-        <DeleteDialogBoxOpen deleteOpenBox={deleteOpenBox} handleDeleteNo={handleDeleteNo} handleDeleteYes={handleDeleteYes} />
-          {/* DELETE SUCCESS MASSAGE */}
-        <Snackbar
-            open={snackbarOpen}
-            autoHideDuration={6000}
-            onClose={handleClose}
-            message={massage}
-            action={<AlertMessage handleClose={handleClose} />}
-        />  
         </ComponentsLayout>
     );
 };
