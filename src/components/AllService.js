@@ -5,6 +5,8 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import * as React from 'react';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 import { useNavigate } from 'react-router-dom';
 import ComponentsLayout from './ComponentsLayout';
 
@@ -26,15 +28,22 @@ const AllService = function () {
         <ComponentsLayout>
           <Box sx={{ my: 5 }}>
             <Grid container direction="row" spacing={4}>
-            {loadData?.map((item, index) => (
-              <Grid item xs={12} md={4} key={index}>
+            {loadData?.map((item) => (
+              <Grid item xs={12} md={4} key={item?._id}>
                   <Card sx={{ maxWidth: 345 }}>
-                    <CardMedia
-                      component="img"
-                      height="580"
-                      image={item?.img}
-                      alt="green iguana"
-                    />
+                    <PhotoProvider>
+                      <div className="foo">
+                          <PhotoView src={item?.img}>
+                            <CardMedia
+                              component="img"
+                              height="580"
+                              image={item?.img}
+                              alt={item?.name}
+                              sx={{ cursor: "pointer" }}
+                            />
+                          </PhotoView>
+                      </div>
+                    </PhotoProvider>
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         {item?.name}
