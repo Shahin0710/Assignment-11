@@ -24,7 +24,7 @@ function App() {
           <Route path="/single_service/:id" element={<SingleService />} />
           {/* ProtectedRoute */}
               <Route path="/review" element={<ProtectedRoute><Review /></ProtectedRoute>} /> 
-              <Route path="/add_review" element={<ProtectedRoute><AddReview /></ProtectedRoute>} /> 
+              <Route path="/add_review/:id" element={<ProtectedRoute><AddReview /></ProtectedRoute>} /> 
           {/* ProtectedRoute */} 
           <Route path="*" element={<PageNotFound />} />
         </Routes>

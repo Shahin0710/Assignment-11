@@ -34,7 +34,11 @@ const SingleService = () => {
     };
     // DIALOG BOX OPEN FUNCTION END 
 
-      React.useEffect( () =>{
+     const handleAddReview = (id) =>{
+        navigate(`/add_review/${id}`);
+    }
+
+    React.useEffect( () =>{
         fetch(`http://localhost:8000/service/${serviceId?.id}`)
         .then( res => res.json())
         .then(data => setLoadData(data));
@@ -66,7 +70,7 @@ const SingleService = () => {
                     </CardContent>
                       <Box display="flex" justifyContent="center" sx={{ mx: 2.5, mb: 2.5 }}>
                         {user?.email ? 
-                            <Button onClick={() => navigate('/add_review')} fullWidth variant="contained">Add Review</Button>
+                            <Button onClick={() => handleAddReview(loadData?._id)} fullWidth variant="contained">Add Review</Button>
                             :
                             <Button onClick={handleDialogOpen} fullWidth variant="contained">Add Review</Button>
                         }
