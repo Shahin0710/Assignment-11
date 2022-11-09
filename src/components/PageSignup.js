@@ -52,7 +52,7 @@ const PageSignup = () => {
             .required('Name is required'),
         photoURL: Yup.string()
             .min(3, 'Minimum characters should be 3')
-            .max(50, 'Maximum characters should be 50')
+            .max(500, 'Maximum characters should be 500')
             .required('Name is required'),
         email: Yup.string().email('Enter valid email').required('Email is required'),
         password: Yup.string()

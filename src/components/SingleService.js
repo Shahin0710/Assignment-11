@@ -16,6 +16,7 @@ const SingleService = () => {
     const navigate = useNavigate();
     const serviceId = useParams();
     const [loadData, setLoadData] = React.useState({});
+    const [commentData, setCommentData] = React.useState([]);
 
     // DIALOG BOX OPEN FUNCTION START 
     const [dialogOpen, setDialogOpen] = React.useState(false);
@@ -42,6 +43,12 @@ const SingleService = () => {
         fetch(`http://localhost:8000/service/${serviceId?.id}`)
         .then( res => res.json())
         .then(data => setLoadData(data));
+    }, [])
+
+    React.useEffect( () =>{
+        fetch('http://localhost:8000/comments')
+        .then( res => res.json())
+        .then(data => setCommentData(data));
     }, [])
     
     return (
@@ -79,19 +86,21 @@ const SingleService = () => {
               </Grid>
               {/* REVIEW SECTION  */}
               <Grid item xs={12} md={8}>
-                  <Card sx={{ maxWidth: "full" }}>
+                  {commentData?.filter((option) => option?.category_id === loadData?.category_id).map((item) => (
+                  <Card sx={{ maxWidth: "full", mb: 2.5 }} key={item?._id}>
                     <CardHeader
                       avatar={
-                        <Avatar alt="P" src="/static/images/avatar/1.jpg" />
+                        <Avatar alt="P" src={item?.userImg} />
                       }
-                      title={loadData?.name}
+                      title={item?.userName}
                     />
                     <CardContent>
                       <Typography variant="body3" color="text.secondary">
-                        {loadData?.description}
+                        {item?.text}
                       </Typography>
                     </CardContent>
                   </Card>
+                ))}
               </Grid>
             </Grid>
           </Box>

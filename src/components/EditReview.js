@@ -7,16 +7,14 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
-import { AuthContext } from '../contexts/UserContext';
 import ComponentsLayout from './ComponentsLayout';
 
-const AddReview = () => {
-    const {user} = React.useContext(AuthContext);
+const EditReview = () => {
     const serviceId = useParams();
     const [loadData, setLoadData] = React.useState({});
 
     const initialValues = {
-        text: '',
+        text: loadData?.text,
     };
 
     const validationSchema = Yup.object().shape({
@@ -31,40 +29,40 @@ const AddReview = () => {
             props.resetForm();
         };
         const category_id = loadData?.category_id;
-        const userEmail = user?.email;
-        const userImg = user?.photoURL;
-        const userName = user?.displayName;
+        const userEmail = loadData?.userEmail;
+        const userImg = loadData?.userImg;
+        const userName = loadData?.userName;
         const text = values.text;
         const userComment = { category_id, userEmail, userImg, userName, text };
-        // console.log(userComment);
+        console.log(userComment);
 
-        fetch('http://localhost:8000/users_comment', {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json'
-            },
-            body: JSON.stringify(userComment)
-        })
-        .then(res => res.json())
-        .then(data => {
-          console.log(data);
-          formReset();
-          // const newUsers = [...users, data];
-          // setUsers(newUsers);
-        })
-        .catch(err => console.error(err))
+        // fetch('http://localhost:8000/users_comment', {
+        //     method: 'POST',
+        //     headers: {
+        //       'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(userComment)
+        // })
+        // .then(res => res.json())
+        // .then(data => {
+        //   console.log(data);
+        //   formReset();
+        // })
+        // .catch(err => console.error(err))
   };
 
     React.useEffect( () =>{
-        fetch(`http://localhost:8000/service/${serviceId?.id}`)
+        fetch(`http://localhost:8000/comments/${serviceId?.id}`)
         .then( res => res.json())
         .then(data => setLoadData(data));
     }, [])
 
+    // console.log(loadData);
+
   return (
     <ComponentsLayout>
         <Typography variant="h4" color="error" align="center" gutterBottom>
-            Add Review
+            Update Review
         </Typography>
           <Box sx={{ my: 8, mx: 4 }}>
               <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit} sx={{ mt: 1 }}>
@@ -90,7 +88,7 @@ const AddReview = () => {
                               variant="contained"
                               sx={{ mt: 3, mb: 2 }}
                           >
-                              Add
+                              Update
                           </Button>
                         </Box>
                     </Form>
@@ -101,4 +99,4 @@ const AddReview = () => {
   )
 }
 
-export default AddReview;
+export default EditReview;

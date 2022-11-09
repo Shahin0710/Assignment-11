@@ -3,12 +3,14 @@ import AddReview from './components/AddReview';
 import AllService from './components/AllService';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
+import EditReview from './components/EditReview';
 import Home from './components/Home';
 import PageLogin from './components/PageLogin';
 import PageNotFound from './components/PageNotFound';
 import PageSignup from './components/PageSignup';
 import Review from './components/Review';
 import SingleService from './components/SingleService';
+import ViewReview from './components/ViewReview';
 import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
           {/* ProtectedRoute */}
               <Route path="/review" element={<ProtectedRoute><Review /></ProtectedRoute>} /> 
               <Route path="/add_review/:id" element={<ProtectedRoute><AddReview /></ProtectedRoute>} /> 
+              <Route path="/comments/edit/:id" element={<ProtectedRoute><EditReview /></ProtectedRoute>} /> 
+              <Route path="/comments/view/:id" element={<ProtectedRoute><ViewReview /></ProtectedRoute>} /> 
           {/* ProtectedRoute */} 
           <Route path="*" element={<PageNotFound />} />
         </Routes>
