@@ -11,8 +11,8 @@ import TopBanner from './TopBanner';
 
 const sections = [
   { title: 'Home', url: '/' },
-  { title: 'Service', url: '/service' },
-  { title: 'Review', url: '/review' },
+  { title: 'All Service', url: '/all_service' },
+  { title: 'My Review', url: '/review' },
   { title: 'Blog', url: '/blog' },
   { title: 'Contact', url: '/contact' },
 ];
