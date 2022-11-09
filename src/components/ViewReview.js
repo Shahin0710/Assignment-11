@@ -3,8 +3,10 @@ import Box from '@mui/material/Box';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import ComponentsLayout from './ComponentsLayout';
+import PageTitle from './PageTitel';
 
 const ViewReview = () => {
+    PageTitle('Review');
     const serviceId = useParams();
     const [loadData, setLoadData] = React.useState({});
 

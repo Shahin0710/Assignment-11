@@ -20,10 +20,12 @@ import * as Yup from 'yup';
 import { AuthContext } from '../contexts/UserContext';
 import AlertMessage from './AlertMessage';
 import ComponentsLayout from './ComponentsLayout';
+import PageTitle from './PageTitel';
 
 const theme = createTheme();
 
 const PageSignup = () => {
+    PageTitle('Page Sign up');
     const navigate = useNavigate();
     const { createUser, signInWithGoogle, updateUserProfile } = React.useContext(AuthContext);
 

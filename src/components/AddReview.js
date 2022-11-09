@@ -9,8 +9,10 @@ import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import { AuthContext } from '../contexts/UserContext';
 import ComponentsLayout from './ComponentsLayout';
+import PageTitle from './PageTitel';
 
 const AddReview = () => {
+    PageTitle('Add Review');
     const {user} = React.useContext(AuthContext);
     const serviceId = useParams();
     const [loadData, setLoadData] = React.useState({});

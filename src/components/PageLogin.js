@@ -19,10 +19,13 @@ import * as Yup from 'yup';
 import { AuthContext } from '../contexts/UserContext';
 import AlertMessage from './AlertMessage';
 import ComponentsLayout from './ComponentsLayout';
+import PageTitle from './PageTitel';
 
 const theme = createTheme();
 
 const PageLogin = () => {
+    PageTitle('Page Login');
+
     const { signIn } = React.useContext(AuthContext);
     const navigate = useNavigate()
 

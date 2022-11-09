@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import ComponentsLayout from './ComponentsLayout';
+import PageTitle from './PageTitel';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -27,6 +28,7 @@ const ExpandMore = styled((props) => {
 }));
 
 const Blog = () => {
+  PageTitle('Blog');
   const [expandedOne, setExpandedOne] = React.useState(false);
   const [expandedTwo, setExpandedTwo] = React.useState(false);
   const [expandedThree, setExpandedThree] = React.useState(false);

@@ -15,8 +15,10 @@ import { AuthContext } from '../contexts/UserContext';
 import AlertMessage from './AlertMessage';
 import ComponentsLayout from './ComponentsLayout';
 import DeleteDialogBoxOpen from './DeleteDialogBoxOpen';
+import PageTitle from './PageTitel';
 
 const Review = function () {
+    PageTitle('My Review');
     const navigate = useNavigate();
     const {user} = React.useContext(AuthContext);
     const [commentData, setCommentData] = React.useState([]);

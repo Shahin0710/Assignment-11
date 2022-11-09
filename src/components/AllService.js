@@ -9,8 +9,10 @@ import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { useNavigate } from 'react-router-dom';
 import ComponentsLayout from './ComponentsLayout';
+import PageTitle from './PageTitel';
 
 const AllService = function () {
+    PageTitle('All Service');
     const navigate = useNavigate();
     const [loadData, setLoadData] = React.useState([]);
 

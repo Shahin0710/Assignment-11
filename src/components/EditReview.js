@@ -10,8 +10,10 @@ import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import AlertMessage from './AlertMessage';
 import ComponentsLayout from './ComponentsLayout';
+import PageTitle from './PageTitel';
 
 const EditReview = () => {
+    PageTitle('Edit Review');
     const serviceId = useParams();
     const [loadData, setLoadData] = React.useState({});
 

@@ -10,8 +10,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../contexts/UserContext';
 import ComponentsLayout from './ComponentsLayout';
 import DialogBox from './DialogBox';
+import PageTitle from './PageTitel';
 
 const SingleService = () => {
+    PageTitle('Service');
     const {user} = React.useContext(AuthContext);
     const navigate = useNavigate();
     const serviceId = useParams();

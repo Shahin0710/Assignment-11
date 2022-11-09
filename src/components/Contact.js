@@ -8,8 +8,11 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { Box, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import * as React from 'react';
 import ComponentsLayout from './ComponentsLayout';
+import PageTitle from './PageTitel';
 
 const Contact = function () {
+    PageTitle('Contact');
+
     return (
       <ComponentsLayout>
         <Box sx={{ my: 15 }}>
