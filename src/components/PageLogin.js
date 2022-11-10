@@ -65,8 +65,27 @@ const PageLogin = () => {
 
         signIn(email, password)
             .then(result => {
-                formReset();
-                navigate(from, {replace: true});
+
+                // GET JWT TOKEN
+                const user = result.user;
+                const currentUser = {
+                  email: user.email
+                }
+                // GET JWT TOKEN HIT API
+                fetch('http://localhost:8000/jwt', {
+                    method: 'POST',
+                    headers: {
+                      'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                .then(res => res.json())
+                .then(data => {
+                  // LOCAL STORAGE SAVE (THIS IS NOT GOOD WAY)
+                  localStorage.setItem('jwt-token', data.token);
+                  formReset();
+                  navigate(from, {replace: true});
+                })
             })
             .catch(error => {
                 setMassage(error.message);

@@ -6,7 +6,7 @@ import Snackbar from '@mui/material/Snackbar';
 import TextField from '@mui/material/TextField';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import AlertMessage from './AlertMessage';
 import ComponentsLayout from './ComponentsLayout';
@@ -14,6 +14,8 @@ import PageTitle from './PageTitel';
 
 const EditReview = () => {
     PageTitle('Edit Review');
+
+    const navigate = useNavigate();
     const serviceId = useParams();
     const [loadData, setLoadData] = React.useState({});
 
@@ -65,6 +67,7 @@ const EditReview = () => {
         formReset();
         setMassage('Successfully Update');
         setSnackbarOpen(true);
+        navigate('/review');
   };
 
     React.useEffect( () =>{

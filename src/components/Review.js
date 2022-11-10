@@ -23,6 +23,12 @@ const Review = function () {
     const {user} = React.useContext(AuthContext);
     const [commentData, setCommentData] = React.useState([]);
 
+    const handleAllDataLoad = () => {
+        fetch('http://localhost:8000/comments')
+        .then( res => res.json())
+        .then(data => setCommentData(data));
+    };
+
     const handleSingleView = (id) =>{
         navigate(`/comments/view/${id}`);
     }
@@ -46,6 +52,7 @@ const Review = function () {
         .then(res => res.json())
         .then(data => {
             console.log(data)
+            handleAllDataLoad();
         });
         setDeleteOpenBox(false);
         setMassage('Successfully Deleted');
@@ -70,11 +77,9 @@ const Review = function () {
     };
     //  DELETE SUCCESS ALERT ACTION END
 
-    React.useEffect( () =>{
-        fetch('http://localhost:8000/comments')
-        .then( res => res.json())
-        .then(data => setCommentData(data));
-    }, [])
+    React.useEffect(() => {
+        handleAllDataLoad();
+    }, []);
 
     return (
         <ComponentsLayout>
