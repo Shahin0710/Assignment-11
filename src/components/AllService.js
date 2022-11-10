@@ -21,7 +21,7 @@ const AllService = function () {
     }
 
     React.useEffect( () =>{
-        fetch('http://localhost:8000/service')
+        fetch('https://service-review-server-side-weld.vercel.app/service')
         .then( res => res.json())
         .then(data => setLoadData(data));
     }, [])

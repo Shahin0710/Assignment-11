@@ -53,7 +53,7 @@ const EditReview = () => {
         const text = values.text;
         const userComment = { category_id, userEmail, userImg, userName, text };
         // console.log(userComment);
-        fetch(`http://localhost:8000/comments/${loadData?._id}`, {
+        fetch(`https://service-review-server-side-weld.vercel.app/comments/${loadData?._id}`, {
             method: 'PUT',
             headers: {
               'content-type': 'application/json'
@@ -71,7 +71,7 @@ const EditReview = () => {
   };
 
     React.useEffect( () =>{
-        fetch(`http://localhost:8000/comments/${serviceId?.id}`)
+        fetch(`https://service-review-server-side-weld.vercel.app/comments/${serviceId?.id}`)
         .then( res => res.json())
         .then(data => setLoadData(data));
     }, [])

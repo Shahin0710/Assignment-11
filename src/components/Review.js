@@ -24,7 +24,7 @@ const Review = function () {
     const [commentData, setCommentData] = React.useState([]);
 
     const handleAllDataLoad = () => {
-        fetch('http://localhost:8000/comments')
+        fetch('https://service-review-server-side-weld.vercel.app/comments')
         .then( res => res.json())
         .then(data => setCommentData(data));
     };
@@ -46,7 +46,7 @@ const Review = function () {
     };
 
     const handleDeleteYes = () => {
-        fetch(`http://localhost:8000/comments_delete/${serviceId}`, {
+        fetch(`https://service-review-server-side-weld.vercel.app/comments_delete/${serviceId}`, {
             method: 'DELETE',
         })
         .then(res => res.json())

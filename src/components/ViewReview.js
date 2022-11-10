@@ -11,7 +11,7 @@ const ViewReview = () => {
     const [loadData, setLoadData] = React.useState({});
 
     React.useEffect( () =>{
-        fetch(`http://localhost:8000/comments/${serviceId?.id}`)
+        fetch(`https://service-review-server-side-weld.vercel.app/comments/${serviceId?.id}`)
         .then( res => res.json())
         .then(data => setLoadData(data));
     }, [])

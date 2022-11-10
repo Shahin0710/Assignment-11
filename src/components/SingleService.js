@@ -42,13 +42,13 @@ const SingleService = () => {
     }
 
     React.useEffect( () =>{
-        fetch(`http://localhost:8000/service/${serviceId?.id}`)
+        fetch(`https://service-review-server-side-weld.vercel.app/service/${serviceId?.id}`)
         .then( res => res.json())
         .then(data => setLoadData(data));
     }, [])
 
     React.useEffect( () =>{
-        fetch('http://localhost:8000/comments')
+        fetch('https://service-review-server-side-weld.vercel.app/comments')
         .then( res => res.json())
         .then(data => setCommentData(data));
     }, [])

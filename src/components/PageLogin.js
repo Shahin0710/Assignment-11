@@ -72,7 +72,7 @@ const PageLogin = () => {
                   email: user.email
                 }
                 // GET JWT TOKEN HIT API
-                fetch('http://localhost:8000/jwt', {
+                fetch('https://service-review-server-side-weld.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                       'content-type': 'application/json'

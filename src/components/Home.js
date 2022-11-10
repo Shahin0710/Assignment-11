@@ -21,7 +21,7 @@ const Home = function () {
     }
 
     React.useEffect( () =>{
-        fetch('http://localhost:8000/service_limit')
+        fetch('https://service-review-server-side-weld.vercel.app/service_limit')
         .then( res => res.json())
         .then(data => setLoadData(data));
     }, [])

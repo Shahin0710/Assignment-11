@@ -40,7 +40,7 @@ const AddReview = () => {
         const userComment = { category_id, userEmail, userImg, userName, text };
         // console.log(userComment);
 
-        fetch('http://localhost:8000/users_comment', {
+        fetch('https://service-review-server-side-weld.vercel.app/users_comment', {
             method: 'POST',
             headers: {
               'content-type': 'application/json'
@@ -58,7 +58,7 @@ const AddReview = () => {
   };
 
     React.useEffect( () =>{
-        fetch(`http://localhost:8000/service/${serviceId?.id}`)
+        fetch(`https://service-review-server-side-weld.vercel.app/service/${serviceId?.id}`)
         .then( res => res.json())
         .then(data => setLoadData(data));
     }, [])
